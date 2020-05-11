@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf/default.conf:/etc/nginx/conf.data/default.conf
+      
+  # S3想定
+  minio:
+    image: minio/minio
+    ports:
+      - 9000:9000
+    volumes:
+      - ./minio/data:/export
+    command: server /export
+    environment:
+      MINIO_ACCESS_KEY: miniominio
+      MINIO_SECRET_KEY: miniominio
+
+  # CloudFront想定
+  varnish:
+    image: varnish:6.0
+    ports:
+      -  8080:80
+    volumes:
+      - ./varnish/conf/default.vcl:/etc/varnish/default.vcl
+    environment:
+      VARNISH_LISTEN_PORT: 80
