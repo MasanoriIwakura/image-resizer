@@ -6,7 +6,7 @@ services:
       context: ./nginx
     volumes:
       - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf/default.conf:/etc/nginx/conf.data/default.conf
+      - ./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
       
   # S3想定
   minio:
@@ -14,8 +14,8 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ./minio/data:/export
-    command: server /export
+      - ./minio/data:/data
+    command: server /data
     environment:
       MINIO_ACCESS_KEY: miniominio
       MINIO_SECRET_KEY: miniominio
