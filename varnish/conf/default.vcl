@@ -19,10 +19,11 @@ backend default {
 }
 
 sub vcl_recv {
-    # Happens before we check if we have this in cache already.
-    #
-    # Typically you clean up the request here, removing cookies you don't need,
-    # rewriting the request, etc:
+    if (req.method != "GET" && req.method != "HEAD") {
+        return (pipe);
+    }
+
+    return (hash);
 }
 
 sub vcl_hash {
