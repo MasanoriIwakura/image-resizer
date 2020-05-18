@@ -41,3 +41,13 @@ ex.)
 http://localhost:8080/resize/500x500/ren.jpg
 ```
 
+## Rotate
+
+```
+http://localhost:8080/rotate/[rotate(90, 180, 270)]/[target image]
+
+ex.)
+http://localhost:8080/rotate/90/ren.jpg
+http://localhost:8080/rotate/180/ren.jpg
+http://localhost:8080/rotate/270/ren.jpg
+```
